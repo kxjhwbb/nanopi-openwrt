@@ -160,7 +160,7 @@ jobs:
           sed -i '/8.8.8.8/d' package/base-files/files/root/setup.sh
           mv ../../scripts/check_wan4.sh package/base-files/files/usr/bin && sed -i '/exit/i\/bin/sh /usr/bin/check_wan4.sh &' package/base-files/files/etc/rc.local
           mv ../../scripts/autoupdate.sh package/base-files/files/root/au.sh && chmod +x package/base-files/files/root/au.sh
-          echo -e '\nDYC Build\n' >> package/base-files/files/etc/banner
+          echo -e '\nBuild with docker by WBB, Script by DYC\n' >> package/base-files/files/etc/banner
 
       - name: Add OpenClash
         run: |
@@ -204,8 +204,7 @@ jobs:
           mv friendlywrt-rk3328/out/*img* ./artifact/
           cp friendlywrt-rk3328/friendlywrt/.config ./artifact/
           zip -r artifact.zip ./artifact/
-          #release_tag="R2S-Lean-$(date +%Y-%m-%d)-Minimal"
-          release_tag="R2S-Minimal-$(date +%Y-%m-%d)-docker"
+          release_tag="R2S-Minimal-$(date +%Y-%m-%d-%h-%i-%s)-with-docker"
           echo "##[set-output name=release_tag;]$release_tag"
       - name: Create Release
         id: create_release
