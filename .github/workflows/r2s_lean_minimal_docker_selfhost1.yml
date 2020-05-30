@@ -1,5 +1,4 @@
 name: r2s Lean版openwrt minimal docker self1
-name: r2s Lean版openwrt minimal docker self1
 
 on:
   push:
