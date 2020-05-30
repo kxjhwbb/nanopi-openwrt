@@ -125,6 +125,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_ttyd=y
           CONFIG_PACKAGE_bandwidthd=y
+          # CONFIG_PACKAGE_wget-nossl is not set
           ' >> configs/config_rk3328
           cd friendlywrt
           git checkout .
