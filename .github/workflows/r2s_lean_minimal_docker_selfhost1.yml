@@ -127,6 +127,8 @@ jobs:
           CONFIG_PACKAGE_bandwidthd=y
           ' >> configs/config_rk3328
           cd friendlywrt
+          git checkout .
+          git clean -fd
           git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
           git remote add upstream https://github.com/coolsnowwolf/lede && git fetch upstream
           git rebase adc1a9a3676b8d7be1b48b5aed185a94d8e42728^ --onto upstream/master -X theirs
