@@ -38,7 +38,6 @@ jobs:
           ln -s ~/friendlywrt-rk3328/ friendlywrt-rk3328
           cd friendlywrt-rk3328
           repo sync -c --no-tags --no-clone-bundle -j8
-          cd friendlywrt/ && git fetch --unshallow
 
       - name: Patch Kernel
         run: |
