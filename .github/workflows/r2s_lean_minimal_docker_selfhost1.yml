@@ -41,7 +41,7 @@ jobs:
           cd kernel
           git checkout .
           git clean -fd
-          cd friendlywrt-rk3328
+          cd ..
 
       - name: Patch Kernel
         run: |
