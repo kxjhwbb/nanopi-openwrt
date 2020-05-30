@@ -39,7 +39,7 @@ jobs:
           cd friendlywrt-rk3328
           repo sync -c --no-tags --no-clone-bundle -j8
           cd kernel
-          git checkout .
+          git checkout . -f
           git clean -fd
           cd ..
 
