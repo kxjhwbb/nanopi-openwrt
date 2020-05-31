@@ -37,6 +37,8 @@ jobs:
         run: |
           ln -s ~/friendlywrt-rk3328/ friendlywrt-rk3328
           cd friendlywrt-rk3328
+          git checkout -f
+          git clean -fd 
           repo sync -c --no-tags --no-clone-bundle -j8
           cd kernel
           git checkout -f
