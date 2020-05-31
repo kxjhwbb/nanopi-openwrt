@@ -46,7 +46,6 @@ jobs:
           git checkout -f
           git clean -fd
           cd ..
-          cd friendlywrt/ && git fetch --unshallow
 
       - name: Patch Kernel
         run: |
