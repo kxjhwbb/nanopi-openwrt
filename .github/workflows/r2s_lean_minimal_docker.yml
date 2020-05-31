@@ -129,6 +129,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-ttyd=y
           CONFIG_PACKAGE_ttyd=y
           CONFIG_PACKAGE_bandwidthd=y
+          CONFIG_PACKAGE_iftop=y
           ' >> configs/config_rk3328
           cd friendlywrt
           git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
