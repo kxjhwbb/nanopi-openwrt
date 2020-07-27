@@ -58,17 +58,16 @@ jobs:
           cd friendlywrt
           git config --local user.email "action@github.com" && git config --local user.name "GitHub Action"
           git remote add upstream https://github.com/coolsnowwolf/lede && git fetch upstream
+          git checkout upstream/master -b tmp
+          git checkout 33f7cb735300bd9a099995236ed768c8925fec75 -- target/linux/sunxi/image/
+          git rm README.md
+          git commit -m 'reset'
+          git checkout master-v18.06.1
           git rebase e561fa6fcc2e744c4a8cbfa1b4cf65107a675414^ --onto 1dee4bedde119aadc586ebf7105cfded3c220711 #bypass a commit that cause an error for next rebasing
-          git rebase 52a38e950de0686cb5a2d3e8e05c38027a8e3d0d^ --onto upstream/master -X theirs
-          git revert --no-edit b65f1ebf0089a2fa0d3e1ad30efc21385a013139
-          git revert --no-edit 2c37fa71f93d150eb67bffdc5bdac8abf5354b16
-          git revert --no-edit 23378ed9a481dc73923f5bfa81637a1a8056882d
-          git revert --no-edit 4787dbaf3cad44b374b660cc0fef9386963e6795
-          git revert --no-edit 463b6ac0508de4788a6e41335471ced0a255e1cd
-          git revert --no-edit 8faac30089ce616940b3e96c4f4d900aeb6b9fcb
+          git rebase 52a38e950de0686cb5a2d3e8e05c38027a8e3d0d^ --onto tmp -X theirs
           #rm target/linux/allwinner-h5/patches-4.14/0001-net-thunderx-workaround-BGX-TX-Underflow-issue.patch
           git checkout upstream/master -- feeds.conf.default
-          sed -i '5s/#src-git/src-git/g' feeds.conf.default
+          sed -i -E 's/#(src-git.+)(helloworld.+)/\1\2/' feeds.conf.default
           cd package/lean/
           #git clone https://github.com/jerrykuku/lua-maxminddb.git
           #git clone https://github.com/jerrykuku/luci-app-vssr.git
@@ -138,6 +137,9 @@ jobs:
           mkdir -p ./artifact/
           mv friendlywrt-h3/out/*img* ./artifact/
           cp friendlywrt-h3/friendlywrt/.config ./artifact/
+          cd ./artifact/
+          md5sum *img* > md5sum.txt
+          cd ..
           zip -r artifact.zip ./artifact/
           release_tag="R1S-H3-$(date +%Y-%m-%d)"
           echo "##[set-output name=release_tag;]$release_tag"

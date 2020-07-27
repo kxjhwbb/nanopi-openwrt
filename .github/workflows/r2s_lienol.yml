@@ -68,7 +68,7 @@ jobs:
           rm target/linux/rockchip-rk3328/patches-4.14/0001-net-thunderx-workaround-BGX-TX-Underflow-issue.patch
           sed -i '/ipv6/,+3d' package/base-files/files/root/setup.sh
           git checkout upstream/dev-19.07 -- feeds.conf.default
-          sed -i 's/Lienol\/openwrt-package/SuLingGG\/openwrt-package/' feeds.conf.default
+          #sed -i 's/Lienol\/openwrt-package/SuLingGG\/openwrt-package/' feeds.conf.default
           sed -i '/exit/i\chown -R root:root /usr/share/netdata/web' package/default-settings/files/zzz-default-settings
           sed -i 's/option fullcone\t1/option fullcone\t0/' package/network/config/firewall/files/firewall.config
           sed -i '/8.8.8.8/d' package/base-files/files/root/setup.sh
@@ -97,6 +97,9 @@ jobs:
           mkdir -p ./artifact/
           mv friendlywrt-rk3328/out/*img* ./artifact/
           cp friendlywrt-rk3328/friendlywrt/.config ./artifact/
+          cd ./artifact/
+          md5sum *img* > md5sum.txt
+          cd ..
           zip -r artifact.zip ./artifact/
           release_tag="R2S-Lienol-$(date +%Y-%m-%d)"
           echo "##[set-output name=release_tag;]$release_tag"
